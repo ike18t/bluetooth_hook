@@ -6,7 +6,7 @@ describe BluetoothScanner do
       before do
         stderr = double('stderr')
 
-        allow(stderr).to receive(:gets).and_return('')
+        allow(stderr).to receive(:gets).and_return(nil)
         allow(Open3).to receive(:popen3).and_return([nil, nil, stderr])
       end
 

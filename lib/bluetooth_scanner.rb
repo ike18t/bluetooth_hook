@@ -5,6 +5,6 @@ class BluetoothScanner
 
   def self.detect(address)
     stderr = Open3.popen3(HCITOOL_INFO_CMD % address)[2]
-    return stderr.gets.empty?
+    return stderr.gets.nil?
   end
 end
