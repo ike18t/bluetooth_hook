@@ -2,9 +2,12 @@ require 'open3'
 
 class BluetoothLowEnergyScanner
   HCITOOL_LESCAN_CMD = 'sudo hcitool lescan'
+  HCITOOL_KILL_CMD = 'sudo pkill --signal SIGINT hcitool'
 
   def self.detect(address)
-    stdout = Open3.popen3(HCITOOL_LESCAN_CMD)[1]
-    return stdout.gets.include?(address)
+    Open3.popen3(HCITOOL_LESCAN_CMD) do |stdin, stdout, stderr, wait_thr|
+      `#{HCITOOL_KILL_CMD}`
+      return stdout.gets.include?(address)
+    end
   end
 end
