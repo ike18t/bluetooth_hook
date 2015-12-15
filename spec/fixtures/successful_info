@@ -1,0 +1,22 @@
+Requesting information ...
+	BD Address:  BC:92:6B:43:DD:51
+	Device Name: iPhone
+	LMP Version:  (0x7) LMP Subversion: 0x410d
+	Manufacturer: Broadcom Corporation (15)
+	Features page 0: 0xbf 0xfe 0xcf 0xfe 0xdb 0xff 0x7b 0x87
+		<3-slot packets> <5-slot packets> <encryption> <slot offset> 
+		<timing accuracy> <role switch> <sniff mode> <RSSI> 
+		<channel quality> <SCO link> <HV2 packets> <HV3 packets> 
+		<u-law log> <A-law log> <CVSD> <paging scheme> <power control> 
+		<transparent SCO> <broadcast encrypt> <EDR ACL 2 Mbps> 
+		<EDR ACL 3 Mbps> <enhanced iscan> <interlaced iscan> 
+		<interlaced pscan> <inquiry with RSSI> <extended SCO> 
+		<EV4 packets> <EV5 packets> <AFH cap. slave> 
+		<AFH class. slave> <LE support> <3-slot EDR ACL> 
+		<5-slot EDR ACL> <sniff subrating> <pause encryption> 
+		<AFH cap. master> <AFH class. master> <EDR eSCO 2 Mbps> 
+		<EDR eSCO 3 Mbps> <3-slot EDR eSCO> <extended inquiry> 
+		<LE and BR/EDR> <simple pairing> <encapsulated PDU> 
+		<err. data report> <non-flush flag> <LSTO> <inquiry TX power> 
+		<EPC> <extended features> 
+	Features page 1: 0x07 0x00 0x00 0x00 0x00 0x00 0x00 0x00
