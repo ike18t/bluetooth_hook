@@ -16,6 +16,8 @@ class BluetoothHook
       @state[address_map.address] = detected
 
       endpoint_url = detected ? address_map.in : address_map.out
+
+      puts "making request to #{endpoint_url}"
       RestClient.put endpoint_url, ''
     end
   end
