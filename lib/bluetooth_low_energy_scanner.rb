@@ -9,7 +9,7 @@ class BluetoothLowEnergyScanner
   def self.detect(address)
     if scan_cache_expired?
       Open3.popen3(HCITOOL_LESCAN_CMD) do |stdin, stdout, stderr, wait_thr|
-        sleep 4
+        sleep 15
         kill_scan
         update_cache(stdout.read)
       end
