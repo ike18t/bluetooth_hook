@@ -1,3 +1,7 @@
 10.whatever:
   in_endpoint: http://whatever.com
+  in_request_verb: POST
+  in_request_payload: 'foo'
   out_endpoint: http://whatever.com
+  out_request_verb: POST
+  out_request_payload: 'foo'

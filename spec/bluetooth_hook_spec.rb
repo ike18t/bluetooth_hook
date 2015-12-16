@@ -1,7 +1,18 @@
 require_relative 'spec_helper'
 
 describe BluetoothHook do
-  let(:address_map) { AddressMap.new("address", "in_url", "out_url") }
+  let(:config) {
+    { 'address' => 'address',
+      'in_endpoint' => 'in',
+      'in_request_verb' => 'POST',
+      'in_request_payload' => 'payload',
+      'out_endpoint' => 'out',
+      'out_request_verb' => 'PUT',
+      'out_request_payload' => 'another payload',
+    }
+  }
+
+  let(:address_map) { AddressMap.new(config) }
 
   before do
     allow(ConfigService).to receive(:get_address_maps).and_return([address_map])
@@ -11,7 +22,10 @@ describe BluetoothHook do
     allow(BluetoothScanner).to receive(:detect).and_return true
     allow(BluetoothLowEnergyScanner).to receive(:detect).and_return false
 
-    expect(RestClient).to receive(:put).with(address_map.in, '')
+    expected_param_hash = { method: address_map.in.verb,
+                            url: address_map.in.url,
+                            payload: address_map.in.payload }
+    expect(RestClient::Request).to receive(:execute).with(expected_param_hash)
 
     BluetoothHook.new.work
   end
@@ -20,7 +34,10 @@ describe BluetoothHook do
     allow(BluetoothScanner).to receive(:detect).and_return false
     allow(BluetoothLowEnergyScanner).to receive(:detect).and_return true
 
-    expect(RestClient).to receive(:put).with(address_map.in, '')
+    expected_param_hash = { method: address_map.in.verb,
+                            url: address_map.in.url,
+                            payload: address_map.in.payload }
+    expect(RestClient::Request).to receive(:execute).with(expected_param_hash)
 
     BluetoothHook.new.work
   end
@@ -29,7 +46,10 @@ describe BluetoothHook do
     allow(BluetoothScanner).to receive(:detect).and_return false
     allow(BluetoothLowEnergyScanner).to receive(:detect).and_return false
 
-    expect(RestClient).to receive(:put).with(address_map.out, '')
+    expected_param_hash = { method: address_map.out.verb,
+                            url: address_map.out.url,
+                            payload: address_map.out.payload }
+    expect(RestClient::Request).to receive(:execute).with(expected_param_hash)
 
     BluetoothHook.new.work
   end
@@ -38,7 +58,10 @@ describe BluetoothHook do
     allow(BluetoothScanner).to receive(:detect).and_return false
     allow(BluetoothLowEnergyScanner).to receive(:detect).and_return false
 
-    expect(RestClient).to receive(:put).with(address_map.out, '').once
+    expected_param_hash = { method: address_map.out.verb,
+                            url: address_map.out.url,
+                            payload: address_map.out.payload }
+    expect(RestClient::Request).to receive(:execute).with(expected_param_hash)
 
     hook = BluetoothHook.new
     hook.work

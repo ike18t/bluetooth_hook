@@ -15,10 +15,18 @@ class BluetoothHook
 
       @state[address_map.address] = detected
 
-      endpoint_url = detected ? address_map.in : address_map.out
+      endpoint = detected ? address_map.in : address_map.out
 
-      puts "making request to #{endpoint_url}"
-      RestClient.put endpoint_url, ''
+      call_endpoint(endpoint)
     end
+  end
+
+  private
+
+  def call_endpoint endpoint
+    puts "making request to #{endpoint.url}"
+    RestClient::Request.execute(method: endpoint.verb,
+                                url: endpoint.url,
+                                payload: endpoint.payload)
   end
 end
