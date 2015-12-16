@@ -1,5 +1,5 @@
 module Cachable
-  CACHE_TIME = 30
+  CACHE_TIME = 120
   @timestamp = nil
   @cache_data = nil
 
