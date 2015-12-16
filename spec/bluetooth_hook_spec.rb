@@ -11,7 +11,7 @@ describe BluetoothHook do
     allow(BluetoothScanner).to receive(:detect).and_return true
     allow(BluetoothLowEnergyScanner).to receive(:detect).and_return false
 
-    expect(RestClient).to receive(:put).with(address_map.in)
+    expect(RestClient).to receive(:put).with(address_map.in, '')
 
     BluetoothHook.new.work
   end
@@ -20,7 +20,7 @@ describe BluetoothHook do
     allow(BluetoothScanner).to receive(:detect).and_return false
     allow(BluetoothLowEnergyScanner).to receive(:detect).and_return true
 
-    expect(RestClient).to receive(:put).with(address_map.in)
+    expect(RestClient).to receive(:put).with(address_map.in, '')
 
     BluetoothHook.new.work
   end
@@ -29,7 +29,7 @@ describe BluetoothHook do
     allow(BluetoothScanner).to receive(:detect).and_return false
     allow(BluetoothLowEnergyScanner).to receive(:detect).and_return false
 
-    expect(RestClient).to receive(:put).with(address_map.out)
+    expect(RestClient).to receive(:put).with(address_map.out, '')
 
     BluetoothHook.new.work
   end
@@ -38,7 +38,7 @@ describe BluetoothHook do
     allow(BluetoothScanner).to receive(:detect).and_return false
     allow(BluetoothLowEnergyScanner).to receive(:detect).and_return false
 
-    expect(RestClient).to receive(:put).with(address_map.out).once
+    expect(RestClient).to receive(:put).with(address_map.out, '').once
 
     hook = BluetoothHook.new
     hook.work
