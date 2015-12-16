@@ -1,27 +1,32 @@
 require_relative 'spec_helper'
 
 describe ConfigService do
-  describe '#get_address_maps' do
-    it 'returns address maps for each address in config' do
-      config = { 'address' => { 'in_endpoint' => 'in',
-                                'in_request_verb' => 'post',
-                                'in_request_payload' => 'payload',
-                                'out_endpoint' => 'out',
-                                'out_request_verb' => 'put',
-                                'out_request_payload' => 'another payload',
-                              } }
-      allow(YAML).to receive(:load_file).and_return(config)
+  describe '#add_address_map' do
+    let(:config) {
+      { 'address' => 'address',
+        'in_endpoint' => 'in',
+        'in_request_verb' => 'POST',
+        'in_request_payload' => 'payload',
+        'out_endpoint' => 'out',
+        'out_request_verb' => 'PUT',
+        'out_request_payload' => 'another payload',
+      }
+    }
 
-      address_maps = ConfigService.get_address_maps
-      expect(address_maps[0].address).to eq('address')
+    let(:address_map) { AddressMap.new(config) }
 
-      expect(address_maps[0].in.url).to eq('in')
-      expect(address_maps[0].in.verb).to eq('post')
-      expect(address_maps[0].in.payload).to eq('payload')
+    it 'should add an address map' do
+      expect(ConfigService).to receive(:get_address_maps).and_return([address_map])
+      new_address = AddressMap.new(config.merge('address' => 'not the same'))
+      address_maps = [address_map, new_address]
+      expect(ConfigService).to receive(:save!).with(address_maps)
+      ConfigService.add_address_map(new_address)
+    end
 
-      expect(address_maps[0].out.url).to eq('out')
-      expect(address_maps[0].out.verb).to eq('put')
-      expect(address_maps[0].out.payload).to eq('another payload')
+    it 'should remove an address map by address' do
+      expect(ConfigService).to receive(:get_address_maps).and_return([address_map])
+      expect(ConfigService).to receive(:save!).with([])
+      ConfigService.remove_address_map_by_address(address_map.address)
     end
   end
 end

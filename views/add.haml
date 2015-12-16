@@ -1,0 +1,32 @@
+%html
+  %body
+    %form{action: '/devices/add', method: 'post'}
+      Address:
+      %input{name:'address', type: 'text'}
+      %fieldset
+        %legend In Range
+        URL:
+        %input{name:'in_endpoint', type: 'text'}
+        HTTP Method:
+        %select{name:'in_request_verb'}
+          %option{value: 'put'} PUT
+          %option{value: 'post'} POST
+          %option{value: 'get'} GET
+        %br
+        Payload:
+        %br
+        %textarea{name: 'in_request_payload'}
+      %fieldset
+        %legend Out of Range
+        URL:
+        %input{name:'out_endpoint', type: 'text'}
+        HTTP Method:
+        %select{name:'out_request_verb'}
+          %option{value: 'put'} PUT
+          %option{value: 'post'} POST
+          %option{value: 'get'} GET
+        %br
+        Payload:
+        %br
+        %textarea{name: 'out_request_payload'}
+      %input{type: 'submit', value: 'Add Device'}

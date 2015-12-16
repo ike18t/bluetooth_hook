@@ -5,6 +5,8 @@ GEM
     diff-lcs (1.2.5)
     domain_name (0.5.25)
       unf (>= 0.0.5, < 1.0.0)
+    haml (4.0.7)
+      tilt
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     method_source (0.8.2)
@@ -36,6 +38,8 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
+    shotgun (0.9.1)
+      rack (>= 1.0)
     sinatra (1.4.6)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -50,11 +54,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  haml
   pry
   rake
   require_all
   rest-client
   rspec
+  shotgun
   sinatra
 
 BUNDLED WITH

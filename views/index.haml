@@ -1,0 +1,17 @@
+%html
+  %body
+    %table
+      %tr
+        %td Address
+        %td In Url
+        %td Out Url
+        %td
+      - address_maps.each do |address_map|
+        %tr
+          %td= address_map.address
+          %td= address_map.in.url
+          %td= address_map.out.url
+          %td
+            %form{action: "/devices/remove/#{address_map.address}", method: 'get'}
+              %input{ type: 'submit', value: 'remove' }
+    %a{ href: 'devices/add' } Add Device
