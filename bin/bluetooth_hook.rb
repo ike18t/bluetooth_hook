@@ -9,5 +9,5 @@ hook = BluetoothHook.new
 
 loop do
   hook.work
-  sleep 30
+  sleep 5
 end
