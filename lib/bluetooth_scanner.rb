@@ -4,7 +4,8 @@ class BluetoothScanner
   HCITOOL_INFO_CMD = 'sudo hcitool info %s'
 
   def self.detect(address)
-    stderr = Open3.popen3(HCITOOL_INFO_CMD % address)[2]
-    return stderr.gets.nil?
+    Open3.popen3(HCITOOL_INFO_CMD % address) do |stdin, stdout, stderr, wait_thr|
+      stderr.gets.nil?
+    end
   end
 end

@@ -7,7 +7,7 @@ describe BluetoothScanner do
         stderr = double('stderr')
 
         allow(stderr).to receive(:gets).and_return(nil)
-        allow(Open3).to receive(:popen3).and_return([nil, nil, stderr])
+        allow(Open3).to receive(:popen3).and_yield('', '', stderr, 1)
       end
 
       it 'should return true for a valid address' do
@@ -21,7 +21,7 @@ describe BluetoothScanner do
         stderr = double('stderr')
 
         allow(stderr).to receive(:gets).and_return(File.read('spec/fixtures/unsuccessful_info_stderr'))
-        allow(Open3).to receive(:popen3).and_return([nil, nil, stderr])
+        allow(Open3).to receive(:popen3).and_yield('', '', stderr, 1)
       end
 
       it 'should return false for an invalid address' do

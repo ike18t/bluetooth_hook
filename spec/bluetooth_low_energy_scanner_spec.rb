@@ -6,7 +6,7 @@ describe BluetoothLowEnergyScanner do
       stdout = double('stdout')
 
       allow(stdout).to receive(:read).and_return(File.read('spec/fixtures/lescan'))
-      allow(Open3).to receive(:popen3).and_yield '', stdout, '', 1
+      allow(Open3).to receive(:popen3).and_yield('', stdout, '', 1)
       allow(BluetoothLowEnergyScanner).to receive(:kill_scan).and_return('')
     end
 
