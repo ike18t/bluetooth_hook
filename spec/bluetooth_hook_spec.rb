@@ -31,6 +31,23 @@ describe BluetoothHook do
     BluetoothHook.new.work
   end
 
+  it 'should save the appropriate scan after first run' do
+    allow(ConfigService).to receive(:get_address_maps).and_return([address_map])
+    allow(BluetoothScanner).to receive(:detect).and_return(true, true)
+    allow(BluetoothLowEnergyScanner).to receive(:detect).and_return false
+
+    expected_param_hash = { method: address_map.in.verb,
+                            url: address_map.in.url,
+                            payload: address_map.in.payload }
+    expect(RestClient::Request).to receive(:execute).with(expected_param_hash)
+    expect(BluetoothScanner).to receive(:detect).with(address_map.address).twice
+    expect(BluetoothLowEnergyScanner).to receive(:detect).with(address_map.address).once
+
+    hook = BluetoothHook.new
+    hook.work
+    hook.work
+  end
+
   it 'should call the in endpoint if bluetooth low energy scanner detect returns true' do
     allow(BluetoothScanner).to receive(:detect).and_return false
     allow(BluetoothLowEnergyScanner).to receive(:detect).and_return true
