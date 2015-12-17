@@ -13,6 +13,7 @@ describe BluetoothHook do
   }
 
   let(:address_map) { AddressMap.new(config) }
+  let(:address_map2) { AddressMap.new(config.merge('address' => 'other', 'out_endpoint' => 'other_in')) }
 
   before do
     allow(ConfigService).to receive(:get_address_maps).and_return([address_map])
@@ -61,7 +62,32 @@ describe BluetoothHook do
     expected_param_hash = { method: address_map.out.verb,
                             url: address_map.out.url,
                             payload: address_map.out.payload }
-    expect(RestClient::Request).to receive(:execute).with(expected_param_hash)
+    expect(RestClient::Request).to receive(:execute).with(expected_param_hash).once
+
+    hook = BluetoothHook.new
+    hook.work
+    hook.work
+  end
+
+  it "should loop over all addresses" do
+    allow(ConfigService).to receive(:get_address_maps).and_return([address_map, address_map2])
+
+    allow(BluetoothScanner).to receive(:detect).with(address_map.address).and_return(false, false)
+    allow(BluetoothScanner).to receive(:detect).with(address_map2.address).and_return(false, true)
+    allow(BluetoothLowEnergyScanner).to receive(:detect).and_return(false)
+
+    expected_param_hash = { method: address_map.out.verb,
+                            url: address_map.out.url,
+                            payload: address_map.out.payload }
+    other_expected_param_hash_out = { method: address_map2.out.verb,
+                                      url: address_map2.out.url,
+                                      payload: address_map2.out.payload }
+    other_expected_param_hash_in = { method: address_map2.in.verb,
+                                      url: address_map2.in.url,
+                                      payload: address_map2.in.payload }
+    expect(RestClient::Request).to receive(:execute).with(expected_param_hash).once
+    expect(RestClient::Request).to receive(:execute).with(other_expected_param_hash_out).once
+    expect(RestClient::Request).to receive(:execute).with(other_expected_param_hash_in).once
 
     hook = BluetoothHook.new
     hook.work

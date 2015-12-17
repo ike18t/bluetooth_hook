@@ -11,7 +11,7 @@ class BluetoothHook
       btle_detected = BluetoothLowEnergyScanner.detect address_map.address
       detected = bt_detected || btle_detected
 
-      return if @state[address_map.address] == detected
+      next if @state[address_map.address] == detected
 
       @state[address_map.address] = detected
 
