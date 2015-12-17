@@ -1,32 +1,27 @@
-%html
-  %body
-    %form{action: '/devices/add', method: 'post'}
-      Address:
-      %input{name:'address', type: 'text'}
-      %fieldset
-        %legend In Range
-        URL:
-        %input{name:'in_endpoint', type: 'text'}
-        HTTP Method:
-        %select{name:'in_request_verb'}
-          %option{value: 'put'} PUT
-          %option{value: 'post'} POST
-          %option{value: 'get'} GET
-        %br
-        Payload:
-        %br
-        %textarea{name: 'in_request_payload'}
-      %fieldset
-        %legend Out of Range
-        URL:
-        %input{name:'out_endpoint', type: 'text'}
-        HTTP Method:
-        %select{name:'out_request_verb'}
-          %option{value: 'put'} PUT
-          %option{value: 'post'} POST
-          %option{value: 'get'} GET
-        %br
-        Payload:
-        %br
-        %textarea{name: 'out_request_payload'}
-      %input{type: 'submit', value: 'Add Device'}
+%form{action: '/devices/add', method: 'post'}
+  %fieldset
+    %legend Address
+    %input#address.form-control{name:'address', type: 'text'}
+  %fieldset
+    %legend In Range
+    %label{for: 'in_endpoint'} URL:
+    %input#in_endpoint.form-control{name: 'in_endpoint', type: 'text'}
+    %label{for: 'in_request_verb'} HTTP Method:
+    %select#in_request_verb.form-control{name: 'in_request_verb'}
+      %option{value: 'put'} PUT
+      %option{value: 'post'} POST
+      %option{value: 'get'} GET
+    %label{for: 'in_request_payload'} Payload:
+    %textarea#in_request_payload.form-control{name: 'in_request_payload'}
+  %fieldset
+    %legend Out of Range
+    %label{for: 'out_endpoint'} URL:
+    %input#out_endpoint.form-control{name: 'out_endpoint', type: 'text'}
+    %label{for: 'out_request_verb'} HTTP Method:
+    %select#out_request_verb.form-control{name: 'out_request_verb'}
+      %option{value: 'put'} PUT
+      %option{value: 'post'} POST
+      %option{value: 'get'} GET
+    %label{for: 'out_request_payload'} Payload:
+    %textarea#out_request_payload.form-control{name: 'out_request_payload'}
+  %input.btn.btn-success{type: 'submit', value: 'Add Device'}
