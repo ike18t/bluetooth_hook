@@ -14,4 +14,5 @@ end
 group :test do
   gem 'rspec'
   gem 'pry'
+  gem 'rack-test'
 end
