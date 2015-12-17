@@ -1,27 +1,37 @@
 %form{action: '/devices/add', method: 'post'}
   %fieldset
     %legend Address
+
     %input#address.form-control{name:'address', type: 'text', pattern: '^([0-9A-Fa-f]{2}:){5}([0-9A-Fa-f]{2})$', required: true, placeholder: 'B8:78:2E:30:1B:D1'}
+
   %fieldset
     %legend In Range
+
     %label{for: 'in_endpoint'} URL:
     %input#in_endpoint.form-control{name: 'in_endpoint', type: 'url', required: true}
+
     %label{for: 'in_request_verb'} HTTP Method:
     %select#in_request_verb.form-control{name: 'in_request_verb', required: true}
       %option{value: 'put'} PUT
       %option{value: 'post'} POST
       %option{value: 'get'} GET
+
     %label{for: 'in_request_payload'} Payload:
     %textarea#in_request_payload.form-control{name: 'in_request_payload'}
+
   %fieldset
     %legend Out of Range
+
     %label{for: 'out_endpoint'} URL:
     %input#out_endpoint.form-control{name: 'out_endpoint', type: 'url', required: true}
+
     %label{for: 'out_request_verb'} HTTP Method:
     %select#out_request_verb.form-control{name: 'out_request_verb', required: true}
       %option{value: 'put'} PUT
       %option{value: 'post'} POST
       %option{value: 'get'} GET
+
     %label{for: 'out_request_payload'} Payload:
     %textarea#out_request_payload.form-control{name: 'out_request_payload'}
+
   %input.btn.btn-success{type: 'submit', value: 'Add Device'}

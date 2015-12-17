@@ -83,8 +83,8 @@ describe BluetoothHook do
                                       url: address_map2.out.url,
                                       payload: address_map2.out.payload }
     other_expected_param_hash_in = { method: address_map2.in.verb,
-                                      url: address_map2.in.url,
-                                      payload: address_map2.in.payload }
+                                     url: address_map2.in.url,
+                                     payload: address_map2.in.payload }
     expect(RestClient::Request).to receive(:execute).with(expected_param_hash).once
     expect(RestClient::Request).to receive(:execute).with(other_expected_param_hash_out).once
     expect(RestClient::Request).to receive(:execute).with(other_expected_param_hash_in).once
