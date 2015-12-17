@@ -1,8 +1,9 @@
 class AddressMap
 
-  attr_reader :address, :in, :out
+  attr_reader :name, :address, :in, :out
 
   def initialize(param_hash)
+    @name = param_hash['name']
     @address = param_hash['address']
 
     @in = Endpoint.new(param_hash['in_endpoint'],
