@@ -2,6 +2,10 @@ class BluetoothWeb < Sinatra::Base
   set :root, File.expand_path(File.join(File.dirname(__FILE__), '..'))
   set :bind, '0.0.0.0'
 
+  get '/' do
+    redirect '/devices'
+  end
+
   get '/devices' do
     address_maps = ConfigService.get_address_maps
     haml :index, locals: { address_maps: address_maps }
