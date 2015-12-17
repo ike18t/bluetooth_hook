@@ -9,5 +9,11 @@ The Bluetooth Hook is a web application which configures devices to fire web req
 
 * Clone the repository
 * Go to project directory
-* To use the web interface for adding/removing devices, run: bundle exec shotgun config.ru
-* To run the application: ./bin/bluetooth_hook.rb
+* To use the web interface for adding/removing devices:
+```
+bundle exec rake start
+```
+* To run the application:
+```
+./bin/bluetooth_hook.rb
+```
