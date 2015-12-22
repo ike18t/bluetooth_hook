@@ -8,7 +8,3 @@ require_all 'app', 'lib'
 RSpec::Core::RakeTask.new(:spec)
 
 task :default => :spec
-
-task :start do
-  BluetoothWeb.run!
-end
