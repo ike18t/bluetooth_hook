@@ -12,7 +12,7 @@ module Cachable
     @timestamp = Time.now
   end
 
-  def scan_cache_expired?
+  def cache_expired?
     @timestamp.nil? || @timestamp + CACHE_TIME < Time.now
   end
 end

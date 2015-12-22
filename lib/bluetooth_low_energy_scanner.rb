@@ -7,7 +7,7 @@ class BluetoothLowEnergyScanner
   HCITOOL_KILL_CMD = 'sudo pkill --signal SIGINT hcitool'
 
   def self.detect(address)
-    if scan_cache_expired?
+    if cache_expired?
       Open3.popen3(HCITOOL_LESCAN_CMD) do |stdin, stdout, stderr, wait_thr|
         sleep 15
         kill_scan
