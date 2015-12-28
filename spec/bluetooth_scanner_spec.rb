@@ -4,10 +4,12 @@ describe BluetoothScanner do
   context '#detect' do
     context 'device is around' do
       before do
-        stderr = double('stderr')
+        wait_thr = double('wait_thr')
+        wait_thr_value = double('wait_thr_value')
 
-        allow(stderr).to receive(:gets).and_return(nil)
-        allow(Open3).to receive(:popen3).and_yield('', '', stderr, 1)
+        allow(wait_thr_value).to receive(:success?).and_return(true)
+        allow(wait_thr).to receive(:value).and_return(wait_thr_value)
+        allow(Open3).to receive(:popen3).and_yield('', '', '', wait_thr)
       end
 
       it 'should return true for a valid address' do
@@ -18,10 +20,12 @@ describe BluetoothScanner do
 
     context 'device is not around' do
       before do
-        stderr = double('stderr')
+        wait_thr = double('wait_thr')
+        wait_thr_value = double('wait_thr_value')
 
-        allow(stderr).to receive(:gets).and_return(File.read('spec/fixtures/unsuccessful_info_stderr'))
-        allow(Open3).to receive(:popen3).and_yield('', '', stderr, 1)
+        allow(wait_thr_value).to receive(:success?).and_return(false)
+        allow(wait_thr).to receive(:value).and_return(wait_thr_value)
+        allow(Open3).to receive(:popen3).and_yield('', '', '', wait_thr)
       end
 
       it 'should return false for an invalid address' do
