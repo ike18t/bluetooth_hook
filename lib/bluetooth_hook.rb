@@ -28,8 +28,12 @@ class BluetoothHook
 
   def call_endpoint endpoint
     puts "making request to #{endpoint.url}"
-    RestClient::Request.execute(method: endpoint.verb,
-                                url: endpoint.url,
-                                payload: endpoint.payload)
+    begin
+      RestClient::Request.execute(method: endpoint.verb,
+                                  url: endpoint.url,
+                                  payload: endpoint.payload)
+    rescue => e
+      puts e.response
+    end
   end
 end
