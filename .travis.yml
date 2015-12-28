@@ -8,6 +8,7 @@ rvm:
   - ruby-head
 env:
   - RUBY_PLATFORM="x86_64-linux"
+  - CODECLIMATE_REPO_TOKEN=dc047ad85ffc249c8e90909f276d83dbcec3812a7a40a89f5122d1c91dfc13e8
 matrix:
   allow_failures:
     - rvm: ruby-head
