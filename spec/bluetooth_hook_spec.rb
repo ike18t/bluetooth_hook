@@ -41,7 +41,6 @@ describe BluetoothHook do
                             payload: address_map.in.payload }
     expect(RestClient::Request).to receive(:execute).with(expected_param_hash)
     expect(BluetoothScanner).to receive(:detect).with(address_map.address).twice
-    expect(BluetoothLowEnergyScanner).to receive(:detect).with(address_map.address).once
 
     hook = BluetoothHook.new
     hook.work

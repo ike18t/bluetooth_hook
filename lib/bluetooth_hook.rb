@@ -17,12 +17,13 @@ class BluetoothHook
   private
 
   def scan_for_device(address, scan_type)
-    return efficient_scan(address, scan_type) if scan_type
-    bt_detected = BluetoothScanner.detect address
-    btle_detected = BluetoothLowEnergyScanner.detect address
-    @scan_types[address] = 'high' if bt_detected
-    @scan_types[address] = 'low'  if btle_detected
-    bt_detected || btle_detected
+    return scan_type.detect(address) if scan_type
+    [BluetoothScanner, BluetoothLowEnergyScanner].inject(false) do |detected, scanner|
+      detected = scanner.detect address
+      next detected if not detected
+      @scan_types[address] = scanner
+      return detected if detected
+    end
   end
 
   def call_endpoint endpoint
@@ -30,9 +31,5 @@ class BluetoothHook
     RestClient::Request.execute(method: endpoint.verb,
                                 url: endpoint.url,
                                 payload: endpoint.payload)
-  end
-
-  def efficient_scan(address, scan_type)
-    scan_type == 'high' ? BluetoothScanner.detect(address) : BluetoothLowEnergyScanner.detect(address)
   end
 end
