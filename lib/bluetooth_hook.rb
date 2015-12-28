@@ -1,5 +1,3 @@
-require 'net/http'
-
 class BluetoothHook
   def initialize
     @state = {}
