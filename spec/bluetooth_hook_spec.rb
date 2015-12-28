@@ -109,4 +109,11 @@ describe BluetoothHook do
     hook.work
     hook.work
   end
+
+  it 'rest client exceptions should be caught' do
+    allow(BluetoothScanner).to receive(:detect).and_return true
+    expect(RestClient::Request).to receive(:execute).and_raise(RestClient::Exception)
+
+    BluetoothHook.new.work
+  end
 end
