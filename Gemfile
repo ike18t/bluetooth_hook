@@ -14,4 +14,5 @@ group :test do
   gem 'rspec'
   gem 'pry'
   gem 'rack-test'
+  gem 'codeclimate-test-reporter'
 end
