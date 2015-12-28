@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/ike18t/bluetooth_hook.svg)](https://travis-ci.org/ike18t/bluetooth_hook)
+[![Code Climate](https://codeclimate.com/github/ike18t/bluetooth_hook/badges/gpa.svg)](https://codeclimate.com/github/ike18t/bluetooth_hook)
+[![Test Coverage](https://codeclimate.com/github/ike18t/bluetooth_hook/badges/coverage.svg)](https://codeclimate.com/github/ike18t/bluetooth_hook/coverage)
+
 bluetooth_hook
 ================
 
