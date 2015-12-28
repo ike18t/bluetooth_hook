@@ -1,9 +1,9 @@
 [![Build Status](https://travis-ci.org/ike18t/bluetooth_hook.svg)](https://travis-ci.org/ike18t/bluetooth_hook)
 [![Code Climate](https://codeclimate.com/github/ike18t/bluetooth_hook/badges/gpa.svg)](https://codeclimate.com/github/ike18t/bluetooth_hook)
 [![Test Coverage](https://codeclimate.com/github/ike18t/bluetooth_hook/badges/coverage.svg)](https://codeclimate.com/github/ike18t/bluetooth_hook/coverage)
+[![Dependency Status](https://gemnasium.com/ike18t/bluetooth_hook.svg)](https://gemnasium.com/ike18t/bluetooth_hook)
 
 ##bluetooth_hook
-
 
 The Bluetooth Hook is a web application which configures devices to fire web requests based on bluetooth visibility. Users can add and remove devices as well as specify endpoints and HTTP Request methods. Then, by running the application, endpoints will respond based on device proximity.
 
