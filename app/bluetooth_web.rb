@@ -21,8 +21,8 @@ class BluetoothWeb < Sinatra::Base
     redirect '/devices'
   end
 
-  get '/devices/remove/:address' do
-    ConfigService.remove_address_map_by_address(params[:address])
+  get '/devices/remove/:name' do
+    ConfigService.remove_address_map_by_name(params[:name])
     redirect '/devices'
   end
 end

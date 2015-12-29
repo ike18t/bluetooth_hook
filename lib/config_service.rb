@@ -13,8 +13,8 @@ class ConfigService
       save! address_maps
     end
 
-    def remove_address_map_by_address(address)
-      address_maps = get_address_maps.reject{ |map| map.address == address }
+    def remove_address_map_by_name(name)
+      address_maps = get_address_maps.reject{ |map| map.name == name }
       save! address_maps
     end
 

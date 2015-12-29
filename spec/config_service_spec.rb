@@ -23,10 +23,10 @@ describe ConfigService do
       ConfigService.add_address_map(new_address)
     end
 
-    it 'should remove an address map by address' do
+    it 'should remove an address map by name' do
       expect(ConfigService).to receive(:get_address_maps).and_return([address_map])
       expect(ConfigService).to receive(:save!).with([])
-      ConfigService.remove_address_map_by_address(address_map.address)
+      ConfigService.remove_address_map_by_name(address_map.name)
     end
   end
 end
