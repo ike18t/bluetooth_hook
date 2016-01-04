@@ -116,4 +116,11 @@ describe BluetoothHook do
 
     BluetoothHook.new.work
   end
+
+  it 'connection refused exceptions should be caught' do
+    allow(BluetoothScanner).to receive(:detect).and_return true
+    expect(RestClient::Request).to receive(:execute).and_raise(Errno::ECONNREFUSED)
+
+    BluetoothHook.new.work
+  end
 end

@@ -32,6 +32,8 @@ class BluetoothHook
       RestClient::Request.execute(method: endpoint.verb,
                                   url: endpoint.url,
                                   payload: endpoint.payload)
+    rescue Errno::ECONNREFUSED
+      puts "connection refused for #{endpoint.url}"
     rescue => e
       puts e.response
     end
