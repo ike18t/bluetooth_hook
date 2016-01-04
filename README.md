@@ -37,4 +37,4 @@ The Bluetooth Hook is a web application which configures devices to fire web req
 ![add device](https://raw.githubusercontent.com/ike18t/bluetooth_hook/master/screenshots/add.png)
 
 
-** Special thanks to [Manheim](www.manheim.com)'s Seller Tools team for allowing me and Rex to work on this during the team Hackathon.**
+** Special thanks to [Manheim](https://www.manheim.com)'s [Seller Tools](https://sites.google.com/site/sellertoolsteam/home) team for allowing me and Rex to work on this during the team Hackathon. **
