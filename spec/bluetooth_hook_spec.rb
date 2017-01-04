@@ -85,7 +85,25 @@ describe BluetoothHook do
     hook.work
   end
 
-  it "should loop over all addresses" do
+  it 'should call the endpoint the second time around if the first call errored' do
+    hook = BluetoothHook.new
+    allow(BluetoothScanner).to receive(:detect).and_return true
+    allow(BluetoothLowEnergyScanner).to receive(:detect).and_return false
+
+    expected_param_hash = { method: address_map.in.verb,
+                            url: address_map.in.url,
+                            payload: address_map.in.payload }
+
+    expect(RestClient::Request).to receive(:execute).with(expected_param_hash)
+                                                    .once
+                                                    .and_raise(Errno::ECONNREFUSED)
+    hook.work
+
+    expect(RestClient::Request).to receive(:execute).with(expected_param_hash).once
+    hook.work
+  end
+
+  it 'should loop over all addresses' do
     allow(ConfigService).to receive(:get_address_maps).and_return([address_map, address_map2])
 
     allow(BluetoothScanner).to receive(:detect).with(address_map.address).and_return(false, false)

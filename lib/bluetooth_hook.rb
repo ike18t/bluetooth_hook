@@ -8,9 +8,9 @@ class BluetoothHook
     ConfigService.get_address_maps.each do |address_map|
       detected = scan_for_device(address_map.address, @scan_types[address_map.address])
       next if @state[address_map.address] == detected
-      @state[address_map.address] = detected
       endpoint = detected ? address_map.in : address_map.out
-      call_endpoint(endpoint)
+      success = call_endpoint(endpoint)
+      @state[address_map.address] = detected if success
     end
   end
 
@@ -32,10 +32,10 @@ class BluetoothHook
       RestClient::Request.execute(method: endpoint.verb,
                                   url: endpoint.url,
                                   payload: endpoint.payload)
-    rescue Errno::ECONNREFUSED
+    rescue Errno::ECONNREFUSED, RestClient::Exception
       puts "connection refused for #{endpoint.url}"
-    rescue => e
-      puts e.response
+      return false
     end
+    return true
   end
 end
